@@ -1,6 +1,6 @@
 <template>
     <div class="account">
-        <h1>This is your account page for us testing</h1>
+        <h1>This is your account page for us testing the end points</h1>
 
         <div v-if="app_signed_in">
         App signed In<br />
