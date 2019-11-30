@@ -1,0 +1,57 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "appwebstore-dev-20190907092350-authRole",
+			"UnauthRoleArn": "arn:aws:iam::974705623374:role/appwebstore-dev-20190907092350-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::974705623374:role/appwebstore-dev-20190907092350-authRole",
+			"Region": "us-west-2",
+			"DeploymentBucketName": "appwebstore-dev-20190907092350-deployment",
+			"UnauthRoleName": "appwebstore-dev-20190907092350-unauthRole",
+			"StackName": "appwebstore-dev-20190907092350",
+			"StackId": "arn:aws:cloudformation:us-west-2:974705623374:stack/appwebstore-dev-20190907092350/e066bec0-d18b-11e9-8c8b-021a2c452506"
+		}
+	},
+	"auth": {
+		"appwebstoreab0b8ef5": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/appwebstore-dev-20190907092350-deployment/amplify-cfn-templates/auth/appwebstoreab0b8ef5-cloudformation-template.yml",
+				"logicalId": "authappwebstoreab0b8ef5"
+			},
+			"lastPushTimeStamp": "2019-09-07T16:46:13.388Z",
+			"output": {
+				"AppClientSecret": "82kj6nu8csooglnshjgn8md1jtq9o41sjd1lqtlahf9ddkh1mvl",
+				"UserPoolId": "us-west-2_jxWHTqHTu",
+				"AppClientIDWeb": "6k59arjh7jk679imgnrl24si9",
+				"AppClientID": "791ij7ijdbgr759hita4dderer",
+				"IdentityPoolId": "us-west-2:8556cd13-4481-4d46-8dd3-a53d9974d192",
+				"IdentityPoolName": "appwebstoreab0b8ef5_identitypool_ab0b8ef5__dev",
+				"UserPoolName": "appwebstoreab0b8ef5_userpool_ab0b8ef5"
+			},
+			"lastPushDirHash": "7zIyMl4EAYmY3JcSbG9xxMhiFzw="
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/appwebstore-dev-20190907092350-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2019-09-07T16:46:13.398Z",
+			"output": {
+				"CloudFrontSecureURL": "https://d2czrabrbhwz16.cloudfront.net",
+				"S3BucketSecureURL": "https://appwebstore-20190907093327-hostingbucket-dev.s3.amazonaws.com",
+				"WebsiteURL": "http://appwebstore-20190907093327-hostingbucket-dev.s3-website-us-west-2.amazonaws.com",
+				"CloudFrontDistributionID": "E95KI93W6MY5X",
+				"Region": "us-west-2",
+				"HostingBucketName": "appwebstore-20190907093327-hostingbucket-dev",
+				"CloudFrontDomainName": "d2czrabrbhwz16.cloudfront.net"
+			},
+			"lastPushDirHash": "Rwm/wh/JrJs+Xw85oqNqN8jqq+o="
+		}
+	}
+}

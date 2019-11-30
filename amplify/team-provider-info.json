@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "appwebstore-dev-20190907092350-authRole",
+            "UnauthRoleArn": "arn:aws:iam::974705623374:role/appwebstore-dev-20190907092350-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::974705623374:role/appwebstore-dev-20190907092350-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "appwebstore-dev-20190907092350-deployment",
+            "UnauthRoleName": "appwebstore-dev-20190907092350-unauthRole",
+            "StackName": "appwebstore-dev-20190907092350",
+            "StackId": "arn:aws:cloudformation:us-west-2:974705623374:stack/appwebstore-dev-20190907092350/e066bec0-d18b-11e9-8c8b-021a2c452506"
+        },
+        "categories": {
+            "auth": {
+                "appwebstoreab0b8ef5": {}
+            }
+        }
+    }
+}
