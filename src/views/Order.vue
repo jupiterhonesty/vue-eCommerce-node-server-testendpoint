@@ -17,6 +17,8 @@
             <br />
         </div>
 
+        <!--      Please USE JSON shoping cart web_totals and not taxtotallines (depricated)-->
+
         <div v-for="tax_total_line in tax_total_lines" v-bind:key="tax_total_line.text">
           {{tax_total_line.text}}  {{tax_total_line.value_show}}
           <br />
