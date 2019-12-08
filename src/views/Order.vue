@@ -52,9 +52,27 @@
     <div v-if="this.order_sent === 3">
       {{thank_you_answer}}
       <br />
-      Your order_id: {{order_id_confirmed}} (todo: use to get order and display it)
+      <br />
+      Order confirmation:
       <br />
       <br />
+      <div v-for="order in this.last_order" v-bind:key="order.internal_order_id">
+        internal order id =  {{order.internal_order_id}}
+        <br />
+        order date = {{order.order_date}} customer order# {{order.order_data.ordernumber}}
+        <br />
+        <br />
+        <div v-for="item in order.order_data.items" v-bind:key="item.id">
+          {{item.qty}} x  {{item.desc}} id: {{item.id}} unit {{ item.single_price_show }} rebate {{item.discount_qty_amount_show}} coupon-code  {{item.discount_code}} total {{item.discounted_qty_price_show}}<br />
+        </div>
+        <br />
+        <div v-for="tax_total_line in order.order_data.taxtotallines" v-bind:key="tax_total_line.text">
+          {{tax_total_line.text}}  {{tax_total_line.value_show}}
+          <br />
+        </div>
+        <br />
+      </div>
+
 
       <a v-bind:href="this.app_link">Open App again</a>
     </div>
@@ -75,6 +93,7 @@
                 app_link: null,
                 qtyplusone: 0,
               order_id: null,
+              last_order: null,
             }
         },
         computed: {
@@ -136,6 +155,7 @@
             this.thank_you =  null;
             this.order_status = null;
             this.app_link = null;
+            this.last_order = null;
         },
 
         methods: {
@@ -178,6 +198,14 @@
                                 }
                                 this.$store.state.shoppingcart.cart = [];
                                 this.$store.state.shoppingcart.cart_count = null;
+
+
+                              axios.get(this.$store.state.api_base_url + `/orderhistory.php`+ '?f=get' + '&orderid=' + this.order_id + '&nocache=' + new Date().getTime(), options)
+                                      .then(val => {
+                                        this.last_order = val.data
+                                      })
+                                      .catch()
+
                             })
                             .catch()
                     }
