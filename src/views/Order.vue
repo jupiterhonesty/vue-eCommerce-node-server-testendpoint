@@ -18,11 +18,20 @@
         </div>
 
         <!--      Please USE JSON shoping cart web_totals and not taxtotallines (depricated)-->
-
+        All tax lines example:
+        <br />
         <div v-for="tax_total_line in tax_total_lines" v-bind:key="tax_total_line.text">
           {{tax_total_line.text}}  {{tax_total_line.value_show}}
           <br />
         </div>
+        <br />
+        <br />Web totals example:
+        <br />
+        <div v-for="tax_web_line in web_totals_return.total_lines" v-bind:key="tax_web_line.text">
+          {{tax_web_line.text}}  {{tax_web_line.value_show}}
+          <br />
+        </div>
+        <br />
 
         Chosen payment type : {{payment_type_text}}  <button v-on:click="switch_payment_method(switch_payment_option)">{{payment_switch_text}}</button>
 
@@ -99,6 +108,9 @@
             tax_total_lines: function () {
                 return this.$store.state.shoppingcart.cart.taxtotallines;
             },
+          web_totals_return: function () {
+            return this.$store.state.shoppingcart.cart.web_totals;
+          },
             user_name: function () {
                 if(this.$store.state.app_user.authenticated) {
                     return this.$store.state.app_user.user.cognitousername;

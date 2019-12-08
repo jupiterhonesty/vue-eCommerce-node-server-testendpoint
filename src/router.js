@@ -10,6 +10,7 @@ import Authenticate from './views/Authenticate.vue'
 import Checkout from './views/Checkout.vue'
 import Shop from './views/Shop.vue'
 import Order from './views/Order.vue'
+import Orderhistory from './views/Orderhistory.vue'
 
 Vue.use(Router)
 
@@ -71,6 +72,13 @@ const router = new Router({
       path: '/order',
       name: 'order',
       component: Order,
+      // disable for non signin mode
+      meta: {requiresLogin: true},
+    },
+    {
+      path: '/orderhistory',
+      name: 'orderhistory',
+      component: Orderhistory,
       // disable for non signin mode
       meta: {requiresLogin: true},
     },

@@ -5,6 +5,7 @@
       <router-link to="/account">Account</router-link> |
       <router-link to="/shop">Shop</router-link> |
       <router-link to="/checkout">Your Cart</router-link> |
+      <router-link to="/orderhistory">Order History</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
