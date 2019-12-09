@@ -17,21 +17,30 @@
             <br />
         </div>
 
-        <!--      Please USE JSON shoping cart web_totals and not taxtotallines (depricated)-->
-        All tax lines example:
+<!--        <div v-for="tax_total_line in tax_total_lines" v-bind:key="tax_total_line.text">-->
+<!--          {{tax_total_line.text}}  {{tax_total_line.value_show}}-->
+<!--          <br />-->
+<!--        </div>-->
+
         <br />
-        <div v-for="tax_total_line in tax_total_lines" v-bind:key="tax_total_line.text">
-          {{tax_total_line.text}}  {{tax_total_line.value_show}}
-          <br />
-        </div>
-        <br />
-        <br />Web totals example:
-        <br />
-        <div v-for="tax_web_line in web_totals_return.total_lines" v-bind:key="tax_web_line.text">
+        <div v-for="tax_web_line in web_total_lines" v-bind:key="tax_web_line.text">
           {{tax_web_line.text}}  {{tax_web_line.value_show}}
           <br />
         </div>
         <br />
+       {{ web_total_title}} (info DETAILS)
+        <br/>
+        <div v-for="tax_web_line in web_total_details" v-bind:key="tax_web_line.text">
+          {{tax_web_line.text}} * {{tax_web_line.value_show}} * {{tax_web_line.description}} * {{tax_web_line.type}}
+          <br />
+        </div>
+        <br />
+        {{ web_total_legal_text}}
+        <br />
+       {{ web_total_legal_url}}
+        <br />
+        <br />
+
 
         Chosen payment type : {{payment_type_text}}  <button v-on:click="switch_payment_method(switch_payment_option)">{{payment_switch_text}}</button>
 
@@ -127,9 +136,22 @@
             tax_total_lines: function () {
                 return this.$store.state.shoppingcart.cart.taxtotallines;
             },
-          web_totals_return: function () {
-            return this.$store.state.shoppingcart.cart.web_totals;
-          },
+
+            web_total_lines: function () {
+              return this.$store.state.shoppingcart.cart.web_total_lines;
+            },
+            web_total_title: function () {
+              return this.$store.state.shoppingcart.cart.web_total_title;
+            },
+            web_total_details: function () {
+              return this.$store.state.shoppingcart.cart.web_total_details;
+            },
+            web_total_legal_text: function () {
+              return this.$store.state.shoppingcart.cart.web_total_legal_text;
+            },
+            web_total_legal_url: function () {
+              return this.$store.state.shoppingcart.cart.web_total_legal_url;
+            },
             user_name: function () {
                 if(this.$store.state.app_user.authenticated) {
                     return this.$store.state.app_user.user.cognitousername;

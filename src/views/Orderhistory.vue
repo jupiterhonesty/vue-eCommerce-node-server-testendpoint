@@ -14,10 +14,25 @@
                 {{item.qty}} x  {{item.desc}} id: {{item.id}} unit {{ item.single_price_show }} rebate {{item.discount_qty_amount_show}} coupon-code  {{item.discount_code}} total {{item.discounted_qty_price_show}}<br />
             </div>
             <br />
-            <div v-for="tax_total_line in order.order_data.taxtotallines" v-bind:key="tax_total_line.text">
-                {{tax_total_line.text}}  {{tax_total_line.value_show}}
+
+<!--            use this to show all details instead -->
+<!--            <div v-for="tax_total_line in order.order_data.taxtotallines" v-bind:key="tax_total_line.text">-->
+<!--                {{tax_total_line.text}}  {{tax_total_line.value_show}}-->
+<!--                <br />-->
+<!--            </div>-->
+
+            <div v-for="tax_web_line in order.order_data.web_total_lines" v-bind:key="tax_web_line.text">
+                {{tax_web_line.text}}  {{tax_web_line.value_show}}
                 <br />
             </div>
+            <br />
+            (i) Information details button:
+            <div v-for="tax_web_detail in order.order_data.web_total_details" v-bind:key="tax_web_detail.text">
+                {{tax_web_detail.text}} * {{tax_web_detail.value_show}} * {{tax_web_detail.description}} * {{tax_web_detail.type}}
+                <br />
+            </div>
+            <br />
+
             *******************
             <br />
             <br />
@@ -39,6 +54,7 @@
             order_history: function () {
                 return this.orderhistory_data;
             },
+
         },
         methods: {
             get_order_history: function () {
