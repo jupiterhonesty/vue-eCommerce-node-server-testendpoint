@@ -6,15 +6,30 @@
 
     <div v-if="this.order_sent === 1">
       <h1>Place Order (popup)</h1>
-      Estimated Delivery time: {{web_delivery_estimate}}
-      <br />
-      <br />
-      <!--            {{longitude_latitude}} for {{user_name}}-->
-      Todo: Search address field and special instructions here
-      <br />
-      <br />
 
       <div v-if="shopping_cart_count">
+
+        Estimated Delivery Time: {{web_delivery_estimate}}
+        <br />
+        <br />
+        <!--                  {{longitude_latitude}} for {{user_name}}-->
+        <br />
+        First Name: {{this.$store.state.app_user.user.firstname}}
+        <br />
+        Last Name: {{this.$store.state.app_user.user.lastname}}
+        <br />
+        <br />
+        Delivery Address <input v-model="delivery_address_text" placeholder="Delivery Address">
+<!--        <p>Address: {{ delivery_address_text }}</p>-->
+        <br />
+        <br />
+        <span>Special instructions:</span>
+        <br />
+        <textarea v-model="special_instructions_message" placeholder="Special instructions"></textarea>
+<!--        <p style="white-space: pre-line;">{{ special_instructions_message }}</p>-->
+        <br />
+        <br />
+
         <div v-for="item in shoppingcartitems" v-bind:key="item.id">
           {{item.qty}} x  {{item.desc}} id: {{item.id}} unit {{ item.single_price_show }} rebate {{item.discount_qty_amount_show}} total {{item.discounted_qty_price_show}}<br />
             <br />
@@ -83,6 +98,8 @@
           <br />
         </div>
         <br />
+        Delivery Address JSON (fields may change): {{order.delivery_address}}
+        <br />
       </div>
 
 
@@ -106,6 +123,8 @@
                 qtyplusone: 0,
               order_id: null,
               last_order: null,
+              special_instructions_message : null,
+              delivery_address_text: null,
             }
         },
         computed: {
@@ -212,21 +231,34 @@
                                 'authorization': this.$store.state.app_user.access_token
                             }
                         }
-                        axios.get(this.$store.state.api_base_url + `shoppingcart.php?f=placeorder` + '&long='+ this.$store.state.app_user.longitude + '&lat=' + this.$store.state.app_user.latitude +  '&nocache=' + new Date().getTime(), options)
-                            .then(val => {
-                                this.order_sent = 3;
-                                this.order_status = val.data;
 
-                                if(this.order_status.status === "OK") {
-                                    this.thank_you = "Your shopping cart order was placed!";
-                                    this.order_id = this.order_status.order_id;
-                                    this.app_link = "highland://?confirmation=1312";
-                                } else {
-                                    this.thank_you = "Problem with your shopping cart order! ";
-                                }
-                                this.$store.state.shoppingcart.cart = [];
-                                this.$store.state.shoppingcart.cart_count = null;
+                          // NEW: to send address and instructions we need a POST request
+                          var myformData = new FormData();
+                          myformData.set('f', 'placeorder');
+                          myformData.set('long', this.$store.state.app_user.longitude);
+                          myformData.set('lat', this.$store.state.app_user.latitude);
+                          myformData.set('address', this.delivery_address_text);
+                          myformData.set('instructions', this.special_instructions_message);
 
+                          axios({
+                            method: 'POST',
+                            url: this.$store.state.api_base_url + 'shoppingcart.php',
+                            data: myformData,
+                            headers: {'Content-Type': 'multipart/form-data','authorization': this.$store.state.app_user.access_token }
+                          })
+                          .then(val => {
+                              this.order_sent = 3;
+                              this.order_status = val.data;
+
+                              if(this.order_status.status === "OK") {
+                                  this.thank_you = "Your shopping cart order was placed!";
+                                  this.order_id = this.order_status.order_id;
+                                  this.app_link = "highland://?confirmation=1312";
+                              } else {
+                                  this.thank_you = "Problem with your shopping cart order! ";
+                              }
+                              this.$store.state.shoppingcart.cart = [];
+                              this.$store.state.shoppingcart.cart_count = null;
 
                               axios.get(this.$store.state.api_base_url + `/orderhistory.php`+ '?f=get' + '&orderid=' + this.order_id + '&nocache=' + new Date().getTime(), options)
                                       .then(val => {
