@@ -232,6 +232,9 @@
                             }
                         }
 
+                          // ADDRESS FORM from Google autocomplete: Please send JSON or format with streetaddress,city,state,zipcode,country https://youtu.be/lSdM3yZkj1w?t=315
+                          // To test you can just send the text string with commas, in 'address' field. App Provided Long/Lat an be used to set address search priority.
+
                           // NEW: to send address and instructions we need a POST request
                           var myformData = new FormData();
                           myformData.set('f', 'placeorder');
