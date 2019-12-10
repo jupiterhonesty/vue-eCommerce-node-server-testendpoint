@@ -6,6 +6,9 @@
 
     <div v-if="this.order_sent === 1">
       <h1>Place Order (popup)</h1>
+      Estimated Delivery time: {{web_delivery_estimate}}
+      <br />
+      <br />
       <!--            {{longitude_latitude}} for {{user_name}}-->
       Todo: Search address field and special instructions here
       <br />
@@ -151,6 +154,9 @@
             },
             web_total_legal_url: function () {
               return this.$store.state.shoppingcart.cart.web_total_legal_url;
+            },
+            web_delivery_estimate: function () {
+              return this.$store.state.shoppingcart.cart.web_delivery_estimate;
             },
             user_name: function () {
                 if(this.$store.state.app_user.authenticated) {
